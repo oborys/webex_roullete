@@ -52,6 +52,10 @@ def createWebhook(bearer, webhookUrl):
     print("Webhook status: done")
 ```
 
+Set related credensials and data 
+
+`NUMBER_OF_PAIRS_PER_DAY`
+
 #### Creating and sending an Adaptive card 
 
 To send an adaptive card, you need to use the `POST` method.
