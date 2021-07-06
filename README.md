@@ -1,18 +1,31 @@
 # Webex Roullete
 
-This solution can help you to create unique pairs for meetings for one mount. And schedule meetings for these pairs for a certain date and time each week
+This solution can help you to create unique pairs for meetings for one mount. And schedule appointments (meetings) for these pairs for a specific date and time each week.
+
+Webex Roullete help to connect remote workers/distributed teams by schedule special recurring meetings (once per week). App help generates the set of unique pairs of colleagues. The solution gets connected employees that do not often connect, from different departments, etc.
+
 
 ![](img/Webex_Roulette.png)
+
+### Structure
+
+  - [Requirements](#Requirements)
+  - [Adaptive_cards](#Adaptive_cards)
+  - [Deployment](#Deployment)
+- [Description](#Description)
+
 
 ### Requirements
 - [Python](https://www.python.org/downloads/)
 - [Docker](https://www.docker.com/get-started)
 
-### How works with adaptive cards
+### Adaptive cards
+
+**How works with adaptive cards**
 
 #### Creating a webhooks 
 
-For reading data from users after Adaptive Card interaction and sending messages we create two webhooks:
+For reading data from users after Adaptive Card interaction and sending messages, we create two webhooks:
 
 ```
 def createWebhook(bearer, webhookUrl):
@@ -41,7 +54,7 @@ def createWebhook(bearer, webhookUrl):
 
 #### Creating and sending an Adaptive card 
 
-For send adaptive card you need to use POST method
+To send an adaptive card, you need to use the `POST` method.
 
 Sample of Python function
 
@@ -75,7 +88,7 @@ def postCard(personEmail):
                     },
                     {
                         "type": "TextBlock",
-                        "text": "Select a date to book the workplace. If limit will be exceeded, you receive a corresponding message",
+                        "text": "Select a date to book the workplace. If the limit is exceeded, you receive a corresponding message",
                         "wrap": true
                     },
                     {
@@ -143,11 +156,11 @@ def postCard(personEmail):
 </p>
 </details>
 
-#### How get data after users interacting with Adaptive card 
+#### How to get data after users interacting with Adaptive card 
 
-You can read users interaction like wich button pushed or data entered. 
+You can read users' interactions like which button pushed or data entered. 
 
-After user interact with element like button with next parameters
+After the user interact with an element like button with the following parameters
 ```
                     {
                         "type": "ActionSet",
@@ -165,7 +178,7 @@ After user interact with element like button with next parameters
                     }
 ```
 
-After pushing buton with type `Action.Submit` on your webhook server you recive `POST` request like below :
+After pushing a button with type `Action.Submit` on the webhook server, you receive a `POST` request like below :
 
 ```
 {
@@ -192,14 +205,14 @@ After pushing buton with type `Action.Submit` on your webhook server you recive 
 }  
 ```
 
-For reading data, you need to filtered webhook as in the sample below, and get JSON data by webhook ID:
+For reading data, you need to filtered webhook as in the sample below and get JSON data by webhook ID:
 
 ```
 if webhook['resource'] == 'attachmentActions':
             result = send_webex_get('https://webexapis.com/v1/attachment/actions/{}'.format(webhook['data']['id']))
 ```            
 
-In response, you can find key `"inputs"` where you can parse all inputs from the user  
+In response, you can find the key `"inputs"` where you can parse all inputs from the user.  
 ```
 {
    "id":"Y2lzY29zc.............VEFDSE1FTlRfQUNUSU9OLzBiMT..........QtMTFlYS05MzA3LTg3ZjgwOTQ........NQ",
@@ -307,17 +320,17 @@ And here is the sample of response if you sent this card
 ```
 
 
-Below you can see some example
-You can test to send your using this project (paste your Adaptive Card Payload in this file [cardText.txt](cardText.txt)) or using this Postman collection
+Below you can see some examples.
+You can test to send your using this project (paste your Adaptive Card Payload in this file [cardText.txt](cardText.txt)) or using this [Postman collection](https://github.com/CiscoDevNet/postman-webex)
 
 Useful links:
 - [Adaptive buttons and cards designer](https://developer.webex.com/buttons-and-cards-designer)
 - [Use Adaptive cards in Webex Teams](https://developer.webex.com/docs/api/guides/cards)
 - [Docs and Schema Explorer](https://docs.microsoft.com/en-us/adaptive-cards/)
 
-After sending you can get details using this request
+After sending, you can get details using this request.
 
-And parse date from user
+And parse the date from the user.
 
 ### Installation
 
@@ -340,13 +353,28 @@ Copy Bot's Access Token
 
 **Paste it into the file [cred](cred) variable `WEBEX_TEAMS_TOKEN` and past bot email in `WEBEX_BOT_EMAIL` variable**
 
-Create Team and Space where bot can publish dayli booking report
+Create Team and Space where the bot can publish daily booking report
 
-You can add the 'roomid@webex.bot' bot to the room and it will send you the roomId in a private message and then remove itself from the room
+You can add the `roomid@webex.bot` bot to the room, and it will send you the roomId in a private message and then remove itself from the room
 
 **Paste it into the file [cred](cred) variable `WEBEX_TEAMS_ROOM_ID_REPORT`**
 
 For sent information to your server/localhost, create [Webhook](https://developer.cisco.com/learning/tracks/devnet-express-cloud-collab-it-pro/creating-spark-bots-itp/collab-spark-botl-itp/step/4)
+
+**4. Webex integrations**
+
+Register a Webex OAuth 2 Integration following the steps outlined [here](https://developer.webex.com/docs/integrations), whereby
+- the *Redirect URI* must be set to: http://localhost:5000/webexoauth
+
+- for the *Scope*, the following values should be selected:
+    - meeting:recordings_read
+    - spark:all
+    - spark:kms 
+    - meeting:schedules_read
+    - meeting:schedules_write
+- Once registered, note down and paste the file [cred](cred) variable value `Client ID` in `WEBEX_INTEGRATION_CLIENT_ID` and `Client Secret` in `WEBEX_INTEGRATION_CLIENT_SECRET`.
+
+Also copy and paste `WEBEX_USER_AUTH_URL`
 
 For testing on localhost, you can use [ngrok](https://ngrok.com/download)
 After installing ngrok open **new terminal window** and run the command
@@ -360,11 +388,20 @@ ngrok http 56733
 
 **Сopy and paste url in file [app/views.py](app/views.py) variable `webhookUrl`**
 
-**4. Set your time zone in [Dockerfile](Dockerfile)**
+**5. Set your time zone in [Dockerfile](Dockerfile)**
 
 By default, timezone is Europe/Kyiv
 
 **After completing all the above points, we can build a container**
+
+Set related credentials and data 
+
+`NUMBER_OF_PAIRS_PER_DAY` varibable
+
+In `WebexRoulette.py` add related emails for Roulette
+Add your company emails split by departments.
+
+
 
 Run docker container on port 56733
 ```
@@ -373,19 +410,19 @@ bash start.sh
 
 Check app availability on your server http://ip-address:56733 or http://localhost:56733
 
-For checking docker container you can use next CLI command
+For checking docker container, you can use next CLI command.
 
 ```
 docker ps
 ```
 ![](img/docker_ps.png)
 
-Running the next command you can see information about container logs, also monitor all output information from the Python app. And command like print, logging.debug, logging.info, logging.warning.   
+Running the following command, you can see information about container logs, also monitor all output information from the Python app. And command like print, logging.debug, logging.info, logging.warning.   
 
 ```
 docker logs [CONTAINER ID]
 ```
-If you edit code files or requirements.txt, run next commands to apply changes
+If you edit code files or requirements.txt, run next commands to apply changes.
 ```
 sudo docker stop sport_report_collab.docker && sudo docker start sport_report_collab.docker
 ```
@@ -394,28 +431,39 @@ Remove the docker container. In case if you got some critical errors, or edit yo
 ```
 docker rm -f [CONTAINER ID]
 ```
+
+Open URL [127.0.0.1/token](127.0.0.1/token)
+You will be redirected to the Webex OAuth page, where you need to enter the credential.
+
+### How it's works
+
+Webex Roulette source code stored in `WebexRoulette.py`
+
+Webex bot Part of the code is stored in `app/views.py`
+
+After running code, webex roullete participant will receive email invites
+![](img/webex_invintation.png)
+
 ### Interaction with bot
 
 Find a bot to interact with
 
-Enter the email of bot that you create
+Enter the email of the bot that you create
 
 ![](img/find_bot.png)
 
+#### Available bot commands
 
-Interaction with bot
+Numbers of the meeting that you want to change like `1`, `2`, `3`, `4`.
 
+Then the user can interact with Webex interactive card.
 
-### How it's works
+In this card, the user can choose a new date and time for the relevant meeting.
 
-The main part of the code is stored in `app/views.py`
+![](img/suggest_new_time_card.png)
 
-
-> Each response should be in a new line. The code detects the Unix system's newlines (\n) symbol as a line delineator.
-
-If the user book workplace on a certain day and capacity of this day is full users get a message `Sorry, all seats have already booked for this day. Try to choose another day, or booking a meeting room. In case of an emergency, contact the lobby.`
-
-#### Available commands
+After push `Suggest a new time`, relevant proposal will be sent to the second participant of the meeting
+![](img/happy_with_new_time_card.png)
 
 
 **Other Useful links**

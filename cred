@@ -1,0 +1,38 @@
+
+[Webex]
+
+WEBEX_INTEGRATION_CLIENT_ID = 
+WEBEX_INTEGRATION_CLIENT_SECRET = 
+WEBEX_INTEGRATION_REDIRECT_URI = http://localhost:56733/webexoauth
+WEBEX_INTEGRATION_SCOPE = meeting:recordings_read spark:all spark:kms meeting:schedules_read meeting:schedules_write
+
+
+# paste OAuth Authorization URL
+WEBEX_USER_AUTH_URL = 
+
+# PASTE_BOT'S_ACCESS_TOKEN
+WEBEX_TEAMS_TOKEN = 
+WEBEX_MEETINGS_TOKEN = 
+WEBEX_BOT_EMAIL = 
+# PASTE_ROOM_ID_REPORT
+WEBEX_TEAMS_ROOM_ID_REPORT = 
+
+# WEBEX_ACCESS_TOKEN will be added after WebexRoulette.py running
+WEBEX_ACCESS_TOKEN = KEEP_IT_BLANK
+# Paste webhookUrl (port 56733)
+WEBEX_WEBHOOK_URL =  
+
+
+[Parameters]
+TIMEZONE_STRING = Europe/Kiev
+# Default meeting start date
+START_DATE = 2020-09-11
+# Default meeting start time
+START_TIME = 15:10:00
+# Default meeting end time
+END_TIME = 15:40:00
+# Paste Current Offset in 'UTCOFFSET' variable 
+# See related values for your location here https://www.timeanddate.com/time/zone/ukraine/kyiv
+UTCOFFSET = +03:00
+# Webex meetinfs API server
+MEETINGS_API_URL = https://webexapis.com/v1

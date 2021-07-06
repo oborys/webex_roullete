@@ -1,0 +1,72 @@
+{
+    "toPersonEmail": "USER_EMAIL",
+    "markdown": "Is the new time right for you?",
+    "attachments": [
+        {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": {
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "type": "AdaptiveCard",
+                "version": "1.0",
+                "body": [
+                    {
+                        "type": "Image",
+                        "altText": "",
+                        "url": "https://i.ibb.co/YLLVkVs/book-workplace.png"
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": "PERSON_NAME offers to move the start of the meeting from (Year-Month-Day format) OLD_DATE to NEW_DATE. Are you happy with the new time?",
+                        "wrap": true
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "meetingId",
+                        "value": "MEETING_ID",
+                        "isVisible": false
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "type",
+                        "value": "askForNewTime",
+                        "isVisible": false
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "newDateTimePeriod",
+                        "value": "TIME_PERIOD",
+                        "isVisible": false
+                    },
+                    {
+                        "type": "ActionSet",
+                        "actions": [
+                        {
+                        "type": "Action.Submit",
+                        "title": "Yes (schedule a meeting for a new time)",
+                        "data": {
+                            "button": "yes"
+                            }
+                        }
+                        ],
+                    "horizontalAlignment": "Left",
+                    "spacing": "None"
+                    },
+                    {
+                        "type": "ActionSet",
+                        "actions": [
+                        {
+                        "type": "Action.Submit",
+                        "title": "No",
+                        "data": {
+                            "button": "no"
+                            }
+                        }
+                        ],
+                    "horizontalAlignment": "Left",
+                    "spacing": "None"
+                    }
+                ]
+            }
+        }
+    ]
+}

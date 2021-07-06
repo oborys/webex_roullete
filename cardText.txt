@@ -1,0 +1,60 @@
+{
+    "toPersonEmail": "USER_EMAIL",
+    "markdown": "Inform Card",
+    "attachments": [
+        {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": {
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "type": "AdaptiveCard",
+                "version": "1.0",
+                "body": [
+                    {
+                        "type": "Image",
+                        "altText": "",
+                        "url": "https://i.ibb.co/QKXdFKM/card-webex-roullete.png"
+                    },
+                    {
+                        "type": "RichTextBlock",
+                        "inlines": [
+                            {
+                                "type": "TextRun",
+                                "text": ""
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Input.Date",
+                        "id": "date",
+                        "placeholder": "Enter a date",
+                        "value": "2021-04-08"
+                    },
+                    {
+                        "type": "Input.Time",
+                        "id": "time",
+                        "placeholder": "Enter a date",
+                        "value": "15:00"
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "meetingId",
+                        "value": "MEETING_ID",
+                        "isVisible": false
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "type",
+                        "value": "newBookingDate",
+                        "isVisible": false
+                    }
+                ],
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "Suggest a new time"
+                    }
+                ]
+            }
+        }
+    ]
+}
