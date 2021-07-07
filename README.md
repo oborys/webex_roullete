@@ -4,6 +4,7 @@ This solution can help you to create unique pairs for meetings for one mount. An
 
 Webex Roullete help to connect remote workers/distributed teams by schedule special recurring meetings (once per week). App help generates the set of unique pairs of colleagues. The solution gets connected employees that do not often connect, from different departments, etc.
 
+You can run the script WebexRoulette.py alone or with Webex bot, which can help users reschedule meeting times for pairs.
 
 ![](img/Webex_Roulette.png)
 
@@ -303,6 +304,8 @@ And here is the sample of response if you sent this card
 }
 </p>
 </details>
+
+For Webex App for Mac `Input.Date` return date in format 08/04/2021 - DD/MM/YYYY for iOS 2021-04-09 YYYY-MM-DD
 
 ```
 {
