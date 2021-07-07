@@ -355,7 +355,7 @@ Create Webex Bot:
 Copy Bot's Access Token
 ![](img/App_Bot_Token.png)
 
-**Paste it into the file [cred](cred) variable `WEBEX_TEAMS_TOKEN` and past bot email in `WEBEX_BOT_EMAIL` variable**
+**Paste it into the file [cred](cred) variable `WEBEX_TEAMS_TOKEN` and paste bot email in `WEBEX_BOT_EMAIL` variable**
 
 Create Team and Space where the bot can publish daily booking report
 
@@ -410,6 +410,25 @@ Add your company emails split by departments.
 Run docker container on port 56733
 ```
 bash start.sh
+```
+
+#### Run for testing and development without docker
+
+Create the venv in webex_roullete folder
+```
+python3 -m venv venv
+```
+Activate your venv
+```
+source venv/bin/activate
+```
+Install dependencies
+```
+pip install -r requirements.txt
+```
+
+```
+python main.py
 ```
 
 Check app availability on your server http://ip-address:56733 or http://localhost:56733
